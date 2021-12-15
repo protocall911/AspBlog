@@ -1,0 +1,43 @@
+@model AspBlog.Models.AdminViewModels.IndexViewModel
+
+<div class="container-fluid">
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+    <div class="row">
+        @foreach (var blog in Model.Blogs)
+        {
+            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="~/UserFiles/Blogs/@blog.Id/HeaderImage.jpg" class="card-img-top">
+                <div class="card-body">
+                    <div class="row" style="margin: 0px auto 10px 0px;">
+                        <div><h5 class="card-title mb-0">@blog.Title</h5></div>
+                        <div class="ml-auto mr-3">
+                            <i class="fas @(blog.Published ? "fa-eye" : "fa-eye-slash")" style="color: @(blog.Published ? "deepskyblue" : "orangered")"></i>
+                        </div>
+                    </div>
+                    <div class="row ml-0">
+                        <div><i class="fas fa-calendar-alt" style="color: gray"></i></div>
+                        <p class="text-muted ml-3 mb-0">Last updated on: @blog.UpdatedOn.ToString("dd/MM/yyyy")</p>
+                    </div>
+                    <div class="row ml-0" style="bottom: 0;">
+                        <div><i class="fas fa-comment" style="color: gray"></i></div>
+                        <p class="text-muted ml-3 mb-0">@blog.Posts.Count() comments</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            <a asp-controller="Blog" asp-action="Edit" asp-route-id="@blog.Id" class="btn btn-secondary float-right">
+                                <i class="fa fa-edit"></i> Edit
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        }
+    </div>
+</div>
